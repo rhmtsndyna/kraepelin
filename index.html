@@ -247,6 +247,12 @@ table th {
 
         <div id="results" style="display: none;">
             <h3>Hasil Tes</h3>
+
+             <!-- Menampilkan informasi yang dipilih -->
+    <div id="test-info">
+      
+        <p>Format Jawaban: <span id="selected-format"></span></p>
+    </div>
             
             <!-- Grafik -->
             <div id="results-chart">
@@ -267,7 +273,7 @@ table th {
             <button id="restart-button">Mulai Ulang Tes</button>
         </div>
 
-        <p class="footer-text">© 2024 Tes Kraepelin By. RFS 😊</p>
+        <p class="footer-text">© 2024 Tes Kraepelin By.Rfs 😊</p>
     </div>
     
     <script>
@@ -298,6 +304,10 @@ table th {
             selectedFormat = answerFormatSelect.value;
             document.getElementById('controls').style.display = 'none';
 
+             // Menampilkan informasi yang dipilih di hasil tes
+
+    document.getElementById('selected-format').textContent = selectedFormat === 'binary' ? '0 - 1' : 'Genap - Ganjil';
+
             // Mulai sesi pertama
             currentSession = 1;
             generateQuestions(duration);
@@ -305,6 +315,8 @@ table th {
             timerElement.style.display = 'block';
             updateTimer(duration);
         });
+
+      
 
         function updateTimer(duration) {
             timerInterval = setInterval(() => {
