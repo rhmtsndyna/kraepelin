@@ -5,205 +5,231 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tes Kraepelin</title>
     <style>
-        /* Umum */
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #eef4f7;
-            margin: 0;
-            padding: 0;
-        }
+       
+/* Umum */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #eef4f7;
+    margin: 0;
+    padding: 0;
+}
 
-        /* Kontainer Utama */
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-
-        /* Heading */
-        h2 {
-            font-size: 24px;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        /* Kontrol */
-        #controls {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        #controls > div {
-            flex: 1 1 calc(33% - 10px);
-            min-width: 150px;
-        }
-
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        select {
-            width: 100%;
-            padding: 8px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        /* Tombol */
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            color: #fff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
-        /* Timer */
-        #timer {
-            font-size: 20px;
-            font-weight: bold;
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: #333;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            display: none;
-        }
-
-        /* Soal */
-        #questions-container {
-            margin-top: 30px;
-            text-align: left;
-        }
-
-        .question {
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            margin-bottom: 15px;
-        }
-
-        .question p {
-            font-weight: bold;
-            margin: 0 0 10px 0;
-        }
-
-       /* Hasil */
-#results {
-    margin-top: 30px;
+/* Kontainer Utama */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-#results h3 {
+/* Heading */
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
     color: #333;
+}
+
+/* Kontrol */
+#controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#controls > div {
+    flex: 1 1 calc(33% - 10px);
+    min-width: 150px;
+}
+
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+select {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Tombol */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Timer */
+#timer {
     font-size: 20px;
+    font-weight: bold;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #333;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: none;
+}
+
+/* Soal */
+#questions-container {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.question {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
     margin-bottom: 15px;
 }
 
+.question p {
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+
+/* Hasil */
+#results {
+margin-top: 30px;
+text-align: center;
+}
+
+#results h3 {
+color: #333;
+font-size: 20px;
+margin-bottom: 15px;
+}
+
 #results p {
-    font-size: 18px;
-    margin: 10px 0;
-    color: #555;
+font-size: 18px;
+margin: 10px 0;
+color: #555;
 }
 
 #restart-button {
-    background-color: #28a745;
-    color: white;
-    font-size: 16px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s;
+background-color: #28a745;
+color: white;
+font-size: 16px;
+padding: 10px 20px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+margin-top: 20px;
+transition: background-color 0.3s;
 }
 
 #restart-button:hover {
-    background-color: #218838;
+background-color: #218838;
 }
 
 .footer-text {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #555;
-            text-align: center;
-        }
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+}
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+table th {
+    background-color: #4CAF50;
+    color: white;
+}
 
-        /* Responsif */
-        @media (max-width: 768px) {
-            #controls {
-                flex-direction: column;
-                gap: 10px;
-            }
+/* Responsif */
+@media (max-width: 768px) {
+    #controls {
+        flex-direction: column;
+        gap: 10px;
+    }
 
-            #controls > div {
-                flex: 1 1 100%;
-            }
+    #controls > div {
+        flex: 1 1 100%;
+    }
 
-            button {
-                width: 100%;
-            }
+    button {
+        width: 100%;
+    }
 
-            #timer {
-                font-size: 16px;
-                padding: 8px 10px;
-            }
+    #timer {
+        font-size: 16px;
+        padding: 8px 10px;
+    }
 
-            h2 {
-                font-size: 20px;
-            }
+    h2 {
+        font-size: 20px;
+    }
+}
+
+        /* Tambahkan gaya untuk canvas */
+        #results-chart {
+            max-width: 600px;
+            margin: 0 auto;
         }
     </style>
+    <!-- Menambahkan Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
         <h2>Tes Kraepelin</h2>
         <div id="controls">
             <div>
-                <label for="timer-select">Durasi Waktu:</label>
+                <label for="timer-select">Durasi Waktu Per Sesi:</label>
                 <select id="timer-select">
                     <option value="60">1 menit</option>
+                    <option value="120">2 menit</option>
                     <option value="180">3 menit</option>
                     <option value="300">5 menit</option>
                     <option value="600">10 menit</option>
-                    <option value="900">15 menit</option>
                     <option value="1200">20 menit</option>
                 </select>
             </div>
-            
-                <!-- <label for="level-select">Level:</label> -->
-                <select id="level-select" hidden>
-                    <option value="easy">Mudah</option>
-                    <option value="medium">Menengah</option>
-                    <option value="hard">Sulit</option>
+            <div>
+                <label for="session-select">Jumlah Sesi:</label>
+                <select id="session-select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
                 </select>
-            
+            </div>
             <div>
                 <label for="answer-format-select">Format Jawaban:</label>
                 <select id="answer-format-select">
@@ -214,25 +240,36 @@
         </div>
         <button id="start-button">Mulai Tes</button>
 
-       
-
-
         <div id="timer">00:00</div>
+        <div id="session-name"></div>
         <div id="questions-container" style="display: none;"></div>
-        <button id="submit-button" style="display: none;">Submit</button>
+        <button id="submit-button" style="display: none;">Next</button>
 
         <div id="results" style="display: none;">
-    <h3>Hasil Tes</h3>
-    <p id="total-correct">Jawaban Benar: 0</p>
-    <p id="total-wrong">Jawaban Salah: 0</p>
-    <p id="total-unanswered">Belum Dijawab: 0</p>
-    <p id="total-time">Waktu yang Dihabiskan: 0:00</p>
-    <button id="restart-button">Mulai Ulang Tes</button>
-</div>
+            <h3>Hasil Tes</h3>
+            
+            <!-- Grafik -->
+            <div id="results-chart">
+                <canvas id="chart"></canvas>
+            </div>
+            
+            <table id="results-table">
+                <thead>
+                    <tr>
+                        <th>Sesi</th>
+                        <th>Jawaban Benar</th>
+                        <th>Jawaban Salah</th>
+                        <th>Waktu</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <button id="restart-button">Mulai Ulang Tes</button>
+        </div>
 
-<p class="footer-text">© 2024 Tes Kraepelin 😊</p>
-
+        <p class="footer-text">© 2024 Tes Kraepelin 😊</p>
     </div>
+    
     <script>
         const startButton = document.getElementById('start-button');
         const timerElement = document.getElementById('timer');
@@ -241,40 +278,43 @@
         const results = document.getElementById('results');
         const restartButton = document.getElementById('restart-button');
         const answerFormatSelect = document.getElementById('answer-format-select');
-        const totalCorrectElem = document.getElementById('total-correct');
-        const totalWrongElem = document.getElementById('total-wrong');
-        const totalUnansweredElem = document.getElementById('total-unanswered');
-        const totalTimeElem = document.getElementById('total-time');
-    
+        const resultsTableBody = document.querySelector('#results-table tbody');
+        const sessionSelect = document.getElementById('session-select');
+        const chartCanvas = document.getElementById('chart').getContext('2d');  // Chart.js context
+
+        let currentSession = 0; // Variabel untuk melacak sesi saat ini
         let startTime;
         let endTime;
-        let timerInterval; // Interval timer
+        let timerInterval;
         let questions = [];
-        let answers = [];
-    
+        let selectedFormat;
+        let maxSessions = 1; // Default jumlah sesi
+        const sessionResults = []; // Menyimpan hasil dari tiap sesi
+
         startButton.addEventListener('click', () => {
+            maxSessions = parseInt(sessionSelect.value); // Baca jumlah sesi yang dipilih
             startButton.style.display = 'none';
             const duration = parseInt(document.getElementById('timer-select').value);
-            const level = document.getElementById('level-select').value;
             selectedFormat = answerFormatSelect.value;
-    
             document.getElementById('controls').style.display = 'none';
-    
-            generateQuestions(level, duration);
-            startTime = Date.now(); // Menyimpan waktu mulai tes
+
+            // Mulai sesi pertama
+            currentSession = 1;
+            generateQuestions(duration);
+            startTime = Date.now();
             timerElement.style.display = 'block';
             updateTimer(duration);
         });
-    
+
         function updateTimer(duration) {
             timerInterval = setInterval(() => {
-                const elapsedTime = Math.floor((Date.now() - startTime) / 1000); // Hitung waktu berlalu
+                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
                 const remainingTime = duration - elapsedTime;
                 if (remainingTime <= 0) {
-                    clearInterval(timerInterval); // Hentikan timer jika habis
+                    clearInterval(timerInterval);
                     timerElement.style.display = 'none';
-                    endTime = Date.now(); // Waktu akhir saat habis
-                    hideQuestionsAndShowResults();
+                    endTime = Date.now();
+                    handleSessionEnd();
                 } else {
                     const minutes = Math.floor(remainingTime / 60);
                     const seconds = remainingTime % 60;
@@ -282,118 +322,194 @@
                 }
             }, 1000);
         }
-    
-        function generateQuestions(level, duration) {
-            const totalQuestions = duration; 
-            questionsContainer.innerHTML = '';
-            questions = [];
-    
-            let min, max;
-            min = 0;
-                max = 10;
-            if (level === 'easy') {
-                min = 0;
-                max = 100;
-            } else if (level === 'medium') {
-                min = 0;
-                max = 99;
-            } else {
-                min = 0;
-                max = 99;
-            }
-    
-            for (let i = 0; i < totalQuestions; i++) {
-                const num1 = Math.floor(Math.random() * (max - min + 1)) + min;
-                const num2 = Math.floor(Math.random() * (max - min + 1)) + min;
-                const correctAnswer = isCorrect(num1, num2);
-    
-                questions.push({ num1, num2, correctAnswer });
-    
-                const questionDiv = document.createElement('div');
-                questionDiv.classList.add('question');
-                questionDiv.innerHTML = `
-                    <p>${num1} + ${num2}</p>
-                    <div>${getAnswerOptions(i)}</div>
-                `;
-                questionsContainer.appendChild(questionDiv);
-            }
-    
-            questionsContainer.style.display = 'block';
-            submitButton.style.display = 'inline-block';
-        }
-    
-        function getAnswerOptions(questionIndex) {
-    // Jika format yang dipilih adalah binary, tampilkan pilihan '0' atau '1'.
-    // Jika format yang dipilih adalah 'ganjil-genap', tampilkan pilihan 'Genap' atau 'Ganjil'.
-    const options = selectedFormat === 'binary' ? ['0', '1'] : ['Genap', 'Ganjil'];
-    
-    return options.map(option => {
-        return `  
-            <label>
-                <input type="radio" name="question-${questionIndex}" value="${option}" />
-                ${option}
-            </label>
+
+        // Fungsi untuk menghasilkan soal baru berdasarkan durasi
+function generateQuestions(duration) {
+    const totalQuestions = duration * 2;  // Misalnya, dua soal per menit
+    questionsContainer.innerHTML = '';    // Bersihkan soal lama
+    questions = [];  // Reset array soal
+
+    for (let i = 0; i < totalQuestions; i++) {
+        const num1 = Math.floor(Math.random() * (99 - 0 + 1)) + 0;
+        const num2 = Math.floor(Math.random() * (99 - 0 + 1)) + 0;
+        const correctAnswer = isCorrect(num1, num2);
+        questions.push({ num1, num2, correctAnswer });
+
+        // Buat div soal dan tampilkan di kontainer
+        const questionDiv = document.createElement('div');
+        questionDiv.classList.add('question');
+        questionDiv.innerHTML = `
+            <p>${num1} + ${num2}</p>
+            <div>${getAnswerOptions(i)}</div>
         `;
-    }).join('');
-}
+        questionsContainer.appendChild(questionDiv);
+    }
 
-function isCorrect(num1, num2) {
-    // Jika format yang dipilih adalah binary:
-    if (selectedFormat === 'binary') {
-        // Kembalikan '0' jika hasil penjumlahan genap, '1' jika hasil penjumlahan ganjil
-        return (num1 + num2) % 2 === 0 ? '0' : '1';
-    }
-    // Jika format yang dipilih adalah ganjil-genap:
-    else {
-        // Kembalikan 'Genap' jika hasil penjumlahan genap, 'Ganjil' jika hasil penjumlahan ganjil
-        return (num1 + num2) % 2 === 0 ? 'Genap' : 'Ganjil';
-    }
+    questionsContainer.style.display = 'block';
+    submitButton.style.display = 'inline-block';
 }
 
 
-    
+        function getAnswerOptions(questionIndex) {
+            const options = selectedFormat === 'binary' ? ['0', '1'] : ['Genap', 'Ganjil'];
+            return options.map(option => {
+                return `  
+                    <label>
+                        <input type="radio" name="question-${questionIndex}" value="${option}" />
+                        ${option}
+                    </label>
+                `;
+            }).join('');
+        }
+
+        function isCorrect(num1, num2) {
+            if (selectedFormat === 'binary') {
+                return (num1 + num2) % 2 === 0 ? '0' : '1';
+            } else {
+                return (num1 + num2) % 2 === 0 ? 'Genap' : 'Ganjil';
+            }
+        }
+
         submitButton.addEventListener('click', () => {
-            clearInterval(timerInterval); // Hentikan timer saat "Submit" diklik
-            endTime = Date.now(); // Perbarui waktu akhir
-            hideQuestionsAndShowResults();
+            clearInterval(timerInterval);
+            endTime = Date.now();
+            handleSessionEnd();
         });
-    
-        function hideQuestionsAndShowResults() {
+
+        function handleSessionEnd() {
+    let correctAnswers = 0;
+    let unanswered = 0;
+
+    questions.forEach((question, index) => {
+        const answer = document.querySelector(`input[name="question-${index}"]:checked`);
+        if (answer) {
+            if (answer.value === question.correctAnswer) {
+                correctAnswers++;
+            }
+        } else {
+            unanswered++;
+        }
+    });
+
+    const wrongAnswers = questions.length - correctAnswers - unanswered;
+    const timeTaken = Math.floor((endTime - startTime) / 1000);
+    const minutes = Math.floor(timeTaken / 60);
+    const seconds = timeTaken % 60;
+
+    sessionResults.push({
+        session: currentSession,
+        correctAnswers,
+        wrongAnswers,
+        timeTaken: `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+    });
+
+    // Cek jika sesi terakhir
+    if (currentSession === maxSessions) {
+        displayFinalResults();
+    } else {
+        // Lanjutkan ke sesi berikutnya
+        currentSession++;
+
+        // Bersihkan kontainer soal lama
+        questionsContainer.innerHTML = ''; // Ini yang baru ditambahkan
+
+        // Mengambil kontainer untuk nama sesi
+    const sessionNameContainer = document.getElementById('session-name');
+
+if (sessionNameContainer) {
+    // Menghapus nama sesi lama hanya jika ada sesi sebelumnya
+    sessionNameContainer.innerHTML = ''; 
+}
+
+// Menampilkan nama sesi baru
+const sessionNameElement = document.createElement('h2');
+sessionNameElement.textContent = 'Sesi ' + currentSession; // Sesuaikan nama sesi
+sessionNameContainer.appendChild(sessionNameElement); // Menambahkan nama sesi ke container
+
+
+
+
+        // Generate soal baru untuk sesi berikutnya
+        const duration = parseInt(document.getElementById('timer-select').value);
+        generateQuestions(duration); // Generate soal untuk sesi berikutnya
+        // Scroll ke atas setelah soal baru digenerate
+        window.scrollTo(0, 0); // Scroll halaman ke atas
+        
+        startTime = Date.now();
+        updateTimer(duration);
+    }
+}
+
+
+        function displayFinalResults() {
+ // Hapus nama sesi sebelum menampilkan hasil akhir
+ const sessionNameContainer = document.getElementById('session-name');
+    if (sessionNameContainer) {
+        sessionNameContainer.innerHTML = ''; // Menghapus nama sesi
+    }
+
             questionsContainer.style.display = 'none';
             submitButton.style.display = 'none';
-            timerElement.style.display = 'none'; 
-    
-            let correctAnswers = 0;
-            let unanswered = 0;
-    
-            questions.forEach((question, index) => {
-                const answer = document.querySelector(`input[name="question-${index}"]:checked`);
-                if (answer) {
-                    if (answer.value === question.correctAnswer) {
-                        correctAnswers++;
+            timerElement.style.display = 'none';
+            results.style.display = 'block';
+
+            sessionResults.forEach(result => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>Sesi ${result.session}</td>
+                    <td>${result.correctAnswers}</td>
+                    <td>${result.wrongAnswers}</td>
+                    <td>${result.timeTaken}</td>
+                `;
+                resultsTableBody.appendChild(row);
+            });
+
+            renderChart();
+        }
+
+        function renderChart() {
+            const labels = sessionResults.map(result => `Sesi ${result.session}`);
+            const correctData = sessionResults.map(result => result.correctAnswers);
+            const wrongData = sessionResults.map(result => result.wrongAnswers);
+
+            const chart = new Chart(chartCanvas, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Jawaban Benar',
+                            data: correctData,
+                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Jawaban Salah',
+                            data: wrongData,
+                            backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        },
+                        y: {
+                            beginAtZero: true
+                        }
                     }
-                } else {
-                    unanswered++;
                 }
             });
-    
-            const wrongAnswers = questions.length - correctAnswers - unanswered;
-            totalCorrectElem.textContent = `Jawaban Benar: ${correctAnswers}`;
-            totalWrongElem.textContent = `Jawaban Salah: ${wrongAnswers}`;
-            totalUnansweredElem.textContent = `Belum Dijawab: ${unanswered}`;
-    
-            const timeTaken = Math.floor((endTime - startTime) / 1000); // Hitung waktu yang dihabiskan
-            const minutes = Math.floor(timeTaken / 60);
-            const seconds = timeTaken % 60;
-            totalTimeElem.textContent = `Waktu yang Dihabiskan: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    
-            results.style.display = 'block';
         }
-    
+
         restartButton.addEventListener('click', () => {
             location.reload();
         });
     </script>
-    
 </body>
 </html>
