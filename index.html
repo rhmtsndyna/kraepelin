@@ -1,527 +1,284 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tes Kraepelin</title>
-    <style>
-       
-/* Umum */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #eef4f7;
-    margin: 0;
-    padding: 0;
-}
-
-/* Kontainer Utama */
-.container {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-/* Heading */
-h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-}
-
-/* Kontrol */
-#controls {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-#controls > div {
-    flex: 1 1 calc(33% - 10px);
-    min-width: 150px;
-}
-
-label {
-    font-weight: bold;
-    margin-bottom: 5px;
-    display: block;
-}
-
-select {
-    width: 100%;
-    padding: 8px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-/* Tombol */
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-/* Timer */
-#timer {
-    font-size: 20px;
-    font-weight: bold;
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background-color: #333;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    display: none;
-}
-
-/* Soal */
-#questions-container {
-    margin-top: 30px;
-    text-align: left;
-}
-
-.question {
-    padding: 10px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 15px;
-}
-
-.question p {
-    font-weight: bold;
-    margin: 0 0 10px 0;
-}
-
-/* Hasil */
-#results {
-margin-top: 30px;
-text-align: center;
-}
-
-#results h3 {
-color: #333;
-font-size: 20px;
-margin-bottom: 15px;
-}
-
-#results p {
-font-size: 18px;
-margin: 10px 0;
-color: #555;
-}
-
-#restart-button {
-background-color: #28a745;
-color: white;
-font-size: 16px;
-padding: 10px 20px;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-margin-top: 20px;
-transition: background-color 0.3s;
-}
-
-#restart-button:hover {
-background-color: #218838;
-}
-
-.footer-text {
-    margin-top: 20px;
-    font-size: 14px;
-    color: #555;
-    text-align: center;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
-table th {
-    background-color: #4CAF50;
-    color: white;
-}
-
-/* Responsif */
-@media (max-width: 768px) {
-    #controls {
-        flex-direction: column;
-        gap: 10px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tes Kreplin Online</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f1eb;
+      margin: 0;
+      padding: 0;
     }
-
-    #controls > div {
-        flex: 1 1 100%;
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      text-align: center;
     }
-
+    .hidden {
+      display: none;
+    }
     button {
-        width: 100%;
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    .chart-buttons {
+      margin: 20px 0;
+    }
+    #question {
+      font-size: 32px;
+      margin: 20px 0;
+    }
+    #interval-label {
+      font-weight: bold;
+      margin-bottom: 10px;
     }
 
-    #timer {
-        font-size: 16px;
-        padding: 8px 10px;
-    }
-
-    h2 {
-        font-size: 20px;
-    }
+    html, body {
+  height: 100%; /* Memastikan body dan html memenuhi seluruh tinggi layar */
+  margin: 0; /* Menghapus margin default */
+  display: flex; /* Mengaktifkan Flexbox pada body */
+  justify-content: center; /* Menyejajarkan konten secara horizontal */
+  align-items: center; /* Menyejajarkan konten secara vertikal */
 }
 
-        /* Tambahkan gaya untuk canvas */
-        #results-chart {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-    </style>
-    <!-- Menambahkan Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+.container {
+  width: 100%;
+  max-width: 1200px; /* Menentukan lebar maksimum kontainer */
+  padding: 20px; /* Menambah ruang di dalam kontainer */
+  background-color: #fff; /* Warna latar belakang putih untuk kartu */
+  border-radius: 15px; /* Sudut membulat agar tampak lebih seperti kartu */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Menambahkan bayangan untuk efek kedalaman */
+  border: 1px solid #e0e0e0; /* Menambahkan border tipis agar terlihat lebih jelas */
+}
+
+/* Optional: Gaya untuk tampilan responsif pada layar kecil */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px; /* Menyesuaikan padding pada layar kecil */
+    border-radius: 10px; /* Lebih kecil pada layar kecil */
+  }
+}
+.container h1 {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.container .button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.container .button:hover {
+  background-color: #45a049;
+}
+
+    
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Tes Kraepelin</h2>
-        <div id="controls">
-            <div>
-                <label for="timer-select">Durasi Waktu Per Sesi:</label>
-                <select id="timer-select">
-                    <option value="60">1 menit</option>
-                    <option value="120">2 menit</option>
-                    <option value="180">3 menit</option>
-                    <option value="300">5 menit</option>
-                    <option value="600">10 menit</option>
-                    <option value="1200">20 menit</option>
-                </select>
-            </div>
-            <div>
-                <label for="session-select">Jumlah Sesi:</label>
-                <select id="session-select">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                </select>
-            </div>
-            <div>
-                <label for="answer-format-select">Format Jawaban:</label>
-                <select id="answer-format-select">
-                    <option value="text">Genap - Ganjil</option>
-                    <option value="binary">0 - 1</option>
-                </select>
-            </div>
-        </div>
-        <button id="start-button">Mulai Tes</button>
-
-        <div id="timer">00:00</div>
-        <div id="session-name"></div>
-        <div id="questions-container" style="display: none;"></div>
-        <button id="submit-button" style="display: none;">Next</button>
-
-        <div id="results" style="display: none;">
-            <h3>Hasil Tes</h3>
-
-             <!-- Menampilkan informasi yang dipilih -->
-    <div id="test-info">
-      
-        <p>Format Jawaban: <span id="selected-format"></span></p>
+  <div class="container">
+    <h1>Tes Kraepelin</h1>
+    <div id="start-section">
+      <label for="test-duration">Pilih Durasi Tes:</label>
+      <select id="test-duration">
+        <option value="60">1 Menit</option>
+        <option value="120">2 Menit</option>
+        <option value="300">5 Menit</option>
+        <option value="600">10 Menit</option>
+        <option value="1200">20 Menit</option>
+        <option value="1800">30 Menit</option>
+        <option value="3600">1 Jam</option>
+      </select>
+      <button id="start-button">START!</button>
     </div>
-            
-            <!-- Grafik -->
-            <div id="results-chart">
-                <canvas id="chart"></canvas>
-            </div>
-            
-            <table id="results-table">
-                <thead>
-                    <tr>
-                        <th>Sesi</th>
-                        <th>Jawaban Benar</th>
-                        <th>Jawaban Salah</th>
-                        <th>Waktu</th>
-                    </tr>
-                </thead>
-                <tbody></tbody>
-            </table>
-            <button id="restart-button">Mulai Ulang Tes</button>
-        </div>
 
-        <p class="footer-text">© 2024 Tes Kraepelin By.Rfs 😊</p>
+    <div id="test-section" class="hidden">
+      <p>Jawab cepat apakah hasil penjumlahan ganjil atau genap!</p>
+      <div><h1 id="question"></h1></div>
+      <div id="answers">
+        <button class="answer-btn" data-answer="ganjil">Ganjil</button>
+        <button class="answer-btn" data-answer="genap">Genap</button>
+      </div>
+      <p><div id="timer">Waktu Tersisa: <span id="time-left"></span></div></p>
     </div>
-    
-    <script>
-        const startButton = document.getElementById('start-button');
-        const timerElement = document.getElementById('timer');
-        const questionsContainer = document.getElementById('questions-container');
-        const submitButton = document.getElementById('submit-button');
-        const results = document.getElementById('results');
-        const restartButton = document.getElementById('restart-button');
-        const answerFormatSelect = document.getElementById('answer-format-select');
-        const resultsTableBody = document.querySelector('#results-table tbody');
-        const sessionSelect = document.getElementById('session-select');
-        const chartCanvas = document.getElementById('chart').getContext('2d');  // Chart.js context
 
-        let currentSession = 0; // Variabel untuk melacak sesi saat ini
-        let startTime;
-        let endTime;
-        let timerInterval;
-        let questions = [];
-        let selectedFormat;
-        let maxSessions = 1; // Default jumlah sesi
-        const sessionResults = []; // Menyimpan hasil dari tiap sesi
+    <div id="result-section" class="hidden">
+      <h2>Hasil Tes</h2>
+      <canvas id="result-chart"></canvas>
+      <div id="interval-label">Interval Waktu:</div>
+      <div class="chart-buttons">
+        <button data-interval="5">5s</button>
+        <button data-interval="30">30s</button>
+        <button data-interval="60">1m</button>
+        <button data-interval="120">2m</button>
+        <button data-interval="180">3m</button>
+        <button data-interval="300">5m</button>
+        <button data-interval="600">10m</button>
+      </div>
+      <button id="restart-button">RESTART</button>
+    </div>
+    <p>© 2024 Tes Kraepelin By.Rfs 😊</p>
+  </div>
 
-        startButton.addEventListener('click', () => {
-            maxSessions = parseInt(sessionSelect.value); // Baca jumlah sesi yang dipilih
-            startButton.style.display = 'none';
-            const duration = parseInt(document.getElementById('timer-select').value);
-            selectedFormat = answerFormatSelect.value;
-            document.getElementById('controls').style.display = 'none';
-
-             // Menampilkan informasi yang dipilih di hasil tes
-
-    document.getElementById('selected-format').textContent = selectedFormat === 'binary' ? '0 - 1' : 'Genap - Ganjil';
-
-            // Mulai sesi pertama
-            currentSession = 1;
-            generateQuestions(duration);
-            startTime = Date.now();
-            timerElement.style.display = 'block';
-            updateTimer(duration);
-        });
-
-      
-
-        function updateTimer(duration) {
-            timerInterval = setInterval(() => {
-                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-                const remainingTime = duration - elapsedTime;
-                if (remainingTime <= 0) {
-                    clearInterval(timerInterval);
-                    timerElement.style.display = 'none';
-                    endTime = Date.now();
-                    handleSessionEnd();
-                } else {
-                    const minutes = Math.floor(remainingTime / 60);
-                    const seconds = remainingTime % 60;
-                    timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-                }
-            }, 1000);
-        }
-
-        // Fungsi untuk menghasilkan soal baru berdasarkan durasi
-function generateQuestions(duration) {
-    const totalQuestions = duration * 2;  // Misalnya, dua soal per menit
-    questionsContainer.innerHTML = '';    // Bersihkan soal lama
-    questions = [];  // Reset array soal
-
-    for (let i = 0; i < totalQuestions; i++) {
-        const num1 = Math.floor(Math.random() * (99 - 0 + 1)) + 0;
-        const num2 = Math.floor(Math.random() * (99 - 0 + 1)) + 0;
-        const correctAnswer = isCorrect(num1, num2);
-        questions.push({ num1, num2, correctAnswer });
-
-        // Buat div soal dan tampilkan di kontainer
-        const questionDiv = document.createElement('div');
-        questionDiv.classList.add('question');
-        questionDiv.innerHTML = `
-            <p>${num1} + ${num2}</p>
-            <div>${getAnswerOptions(i)}</div>
-        `;
-        questionsContainer.appendChild(questionDiv);
+  <script>
+    let questions = [];
+    let userAnswers = [];
+    let correctAnswers = [];
+    let timeStamps = [];
+    let timer;
+    let timeLeft;
+    let elapsedTime = 0;
+    let chartInstance;
+  
+    document.getElementById('start-button').addEventListener('click', startTest);
+    document.getElementById('restart-button').addEventListener('click', () => location.reload());
+  
+    function startTest() {
+      const duration = parseInt(document.getElementById('test-duration').value);
+      timeLeft = duration;
+      elapsedTime = 0;
+  
+      document.getElementById('start-section').classList.add('hidden');
+      document.getElementById('test-section').classList.remove('hidden');
+      document.getElementById('time-left').textContent = `${timeLeft} detik`;
+  
+      generateQuestion();
+      startTimer();
     }
-
-    questionsContainer.style.display = 'block';
-    submitButton.style.display = 'inline-block';
-}
-
-
-        function getAnswerOptions(questionIndex) {
-            const options = selectedFormat === 'binary' ? ['0', '1'] : ['Genap', 'Ganjil'];
-            return options.map(option => {
-                return `  
-                    <label>
-                        <input type="radio" name="question-${questionIndex}" value="${option}" />
-                        ${option}
-                    </label>
-                `;
-            }).join('');
+  
+    function startTimer() {
+      timer = setInterval(() => {
+        timeLeft--;
+        elapsedTime++;
+        document.getElementById('time-left').textContent = `${timeLeft} detik`;
+  
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          endTest();
         }
-
-        function isCorrect(num1, num2) {
-            if (selectedFormat === 'binary') {
-                return (num1 + num2) % 2 === 0 ? '0' : '1';
-            } else {
-                return (num1 + num2) % 2 === 0 ? 'Genap' : 'Ganjil';
-            }
-        }
-
-        submitButton.addEventListener('click', () => {
-            clearInterval(timerInterval);
-            endTime = Date.now();
-            handleSessionEnd();
-        });
-
-        function handleSessionEnd() {
-    let correctAnswers = 0;
-    let unanswered = 0;
-
-    questions.forEach((question, index) => {
-        const answer = document.querySelector(`input[name="question-${index}"]:checked`);
-        if (answer) {
-            if (answer.value === question.correctAnswer) {
-                correctAnswers++;
-            }
-        } else {
-            unanswered++;
-        }
-    });
-
-    const wrongAnswers = questions.length - correctAnswers - unanswered;
-    const timeTaken = Math.floor((endTime - startTime) / 1000);
-    const minutes = Math.floor(timeTaken / 60);
-    const seconds = timeTaken % 60;
-
-    sessionResults.push({
-        session: currentSession,
-        correctAnswers,
-        wrongAnswers,
-        timeTaken: `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
-    });
-
-    // Cek jika sesi terakhir
-    if (currentSession === maxSessions) {
-        displayFinalResults();
-    } else {
-        // Lanjutkan ke sesi berikutnya
-        currentSession++;
-
-        // Bersihkan kontainer soal lama
-        questionsContainer.innerHTML = ''; // Ini yang baru ditambahkan
-
-        // Mengambil kontainer untuk nama sesi
-    const sessionNameContainer = document.getElementById('session-name');
-
-if (sessionNameContainer) {
-    // Menghapus nama sesi lama hanya jika ada sesi sebelumnya
-    sessionNameContainer.innerHTML = ''; 
-}
-
-// Menampilkan nama sesi baru
-const sessionNameElement = document.createElement('h2');
-sessionNameElement.textContent = 'Sesi ' + currentSession; // Sesuaikan nama sesi
-sessionNameContainer.appendChild(sessionNameElement); // Menambahkan nama sesi ke container
-
-
-
-
-        // Generate soal baru untuk sesi berikutnya
-        const duration = parseInt(document.getElementById('timer-select').value);
-        generateQuestions(duration); // Generate soal untuk sesi berikutnya
-        // Scroll ke atas setelah soal baru digenerate
-        window.scrollTo(0, 0); // Scroll halaman ke atas
-        
-        startTime = Date.now();
-        updateTimer(duration);
+      }, 1000);
     }
-}
-
-
-        function displayFinalResults() {
- // Hapus nama sesi sebelum menampilkan hasil akhir
- const sessionNameContainer = document.getElementById('session-name');
-    if (sessionNameContainer) {
-        sessionNameContainer.innerHTML = ''; // Menghapus nama sesi
+  
+    function generateQuestion() {
+      const num1 = Math.floor(Math.random() * 100);
+      const num2 = Math.floor(Math.random() * 100);
+      const result = num1 + num2;
+  
+      document.getElementById('question').textContent = `${num1} + ${num2}`;
+      questions.push({ question: `${num1} + ${num2}`, result });
+  
+      document.querySelectorAll('.answer-btn').forEach((btn) => {
+        btn.onclick = () => checkAnswer(btn.dataset.answer, result);
+      });
     }
-
-            questionsContainer.style.display = 'none';
-            submitButton.style.display = 'none';
-            timerElement.style.display = 'none';
-            results.style.display = 'block';
-
-            sessionResults.forEach(result => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>Sesi ${result.session}</td>
-                    <td>${result.correctAnswers}</td>
-                    <td>${result.wrongAnswers}</td>
-                    <td>${result.timeTaken}</td>
-                `;
-                resultsTableBody.appendChild(row);
-            });
-
-            renderChart();
-        }
-
-        function renderChart() {
-            const labels = sessionResults.map(result => `Sesi ${result.session}`);
-            const correctData = sessionResults.map(result => result.correctAnswers);
-            const wrongData = sessionResults.map(result => result.wrongAnswers);
-
-            const chart = new Chart(chartCanvas, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [
-                        {
-                            label: 'Jawaban Benar',
-                            data: correctData,
-                            backgroundColor: 'rgba(75, 192, 192, 0.6)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderWidth: 1
-                        },
-                        {
-                            label: 'Jawaban Salah',
-                            data: wrongData,
-                            backgroundColor: 'rgba(255, 99, 132, 0.6)',
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            borderWidth: 1
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        x: {
-                            beginAtZero: true
-                        },
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                }
-            });
-        }
-
-        restartButton.addEventListener('click', () => {
-            location.reload();
+  
+    function checkAnswer(answer, correct) {
+      const isCorrect = (correct % 2 === 0 && answer === 'genap') || (correct % 2 !== 0 && answer === 'ganjil');
+      userAnswers.push(answer);
+      correctAnswers.push(isCorrect);
+      timeStamps.push(elapsedTime);
+  
+      if (timeLeft > 0) generateQuestion();
+    }
+  
+    function endTest() {
+      document.getElementById('test-section').classList.add('hidden');
+      document.getElementById('result-section').classList.remove('hidden');
+  
+      setupIntervalButtons();
+      displayChart(5); // Default to 5-second intervals.
+    }
+  
+    function displayChart(interval) {
+      const maxTime = Math.max(...timeStamps);
+      const labels = [];
+      const correctData = [];
+      const wrongData = [];
+  
+      // Generate labels based on the selected interval and duration of the test
+      for (let i = 0; i < maxTime; i += interval) {
+        // Creating the range label, e.g., "0-5s", "5-10s", "10-15s"
+        const start = i;
+        const end = i + interval;
+        labels.push(`${start}-${end}${interval === 60 ? 'm' : 's'}`);
+  
+        // Calculate correct and wrong answers in this interval
+        const correctCount = correctAnswers.filter((isCorrect, idx) =>
+          timeStamps[idx] > start && timeStamps[idx] <= end && isCorrect
+        ).length;
+        const totalCount = timeStamps.filter((_, idx) =>
+          timeStamps[idx] > start && timeStamps[idx] <= end
+        ).length;
+        const wrongCount = totalCount - correctCount;
+  
+        correctData.push(correctCount);
+        wrongData.push(wrongCount);
+      }
+  
+      if (chartInstance) chartInstance.destroy();
+  
+      const ctx = document.getElementById('result-chart').getContext('2d');
+      chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [
+            {
+              label: 'Jawaban Benar',
+              data: correctData,
+              borderColor: '#4CAF50',
+              fill: false,
+            },
+            {
+              label: 'Jawaban Salah',
+              data: wrongData,
+              borderColor: '#F44336',
+              fill: false,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Interval Waktu',
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Jumlah Jawaban',
+              },
+            },
+          },
+        },
+      });
+    }
+  
+    function setupIntervalButtons() {
+      document.querySelectorAll('.chart-buttons button').forEach((button) => {
+        button.addEventListener('click', () => {
+          const interval = parseInt(button.dataset.interval);
+          displayChart(interval);
         });
-    </script>
+      });
+    }
+  </script>
+  
 </body>
 </html>
